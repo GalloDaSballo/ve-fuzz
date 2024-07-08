@@ -10,10 +10,8 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
     function setUp() public {
         setup();
 
-        targetContract(address(counter));
-    }
 
-    function test_crytic() public {
-        // TODO: add failing property tests here for debugging
+    }
+    function test_ve() public {
     }
 }
