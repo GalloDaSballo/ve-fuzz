@@ -7,3 +7,4 @@ balanceAddr: 0x1043561a8829300000
 balanceContract: 0x1043561a8829300000
 filterFunctions: []
 cryticArgs: ["--foundry-compile-all"]
+codeSize: 0x100e2

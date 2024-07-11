@@ -77,5 +77,29 @@ abstract contract TargetFunctions is
         }
     }
 
+    // If lock is expired you can always withdraw
+    function check_withdrawal(uint256 _tokenId) public {
+        _tokenId = _clampId(_tokenId);
+        (int128 amount, uint end) = ve.locked(_tokenId);
+        // Ensure we get amouts
+        // Ensure we do not throw
+        if(end > block.timestamp) {
+            return;
+        }
+
+        if(!ve.isApprovedOrOwner(address(this), _tokenId)) {
+            return;
+        }
+
+        uint256 amtBefore = token_deposit.balanceOf(address(this));
+        try ve.withdraw(_tokenId) {
+            
+        } catch {
+            t(false, "Should not fail!!");
+        }
+        uint256 amtAfter = token_deposit.balanceOf(address(this));
+        t(amtAfter - amtBefore == uint256(int256(amount)), "Must match amt");
+    }
+
 
 }
